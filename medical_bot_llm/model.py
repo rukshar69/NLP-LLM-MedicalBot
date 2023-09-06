@@ -29,6 +29,17 @@ def set_custom_prompt():
 
 #Retrieval QA Chain
 def retrieval_qa_chain(llm, prompt, db):
+    """
+    Generate a retrieval-based question answering chain.
+
+    Args:
+        llm (LLM): The language model used for generating queries.
+        prompt (str): The prompt or initial context for the question answering chain.
+        db (Database): The database used for retrieving relevant documents.
+
+    Returns:
+        RetrievalQA: The retrieval-based question answering chain.
+    """
     qa_chain = RetrievalQA.from_chain_type(llm=llm,
                                        chain_type='stuff',
                                        retriever=db.as_retriever(search_kwargs={'k': 2}),
@@ -39,6 +50,12 @@ def retrieval_qa_chain(llm, prompt, db):
 
 #Loading the model
 def load_llm():
+    """
+    Load the LLM model.
+
+    Returns:
+        CTransformers object: The loaded model.
+    """
     # Load the locally downloaded model here
     llm = CTransformers(
         model = "TheBloke/Llama-2-7B-Chat-GGML",
@@ -50,6 +67,12 @@ def load_llm():
 
 #QA Model Function
 def qa_bot():
+    """
+    Generates a QA bot by initializing the necessary components and returning the QA object.
+
+    Returns:
+        qa (retrieval_qa_chain): The QA object used for question answering.
+    """
     embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2",
                                        model_kwargs={'device': 'cpu'})
     db = FAISS.load_local(DB_FAISS_PATH, embeddings)
@@ -68,6 +91,11 @@ def final_result(query):
 #chainlit code
 @cl.on_chat_start
 async def start():
+    """
+    Initializes and starts the chatbot.
+
+    This function is decorated with the `cl.on_chat_start` decorator, which means it will be triggered when a chat session starts.
+    """
     chain = qa_bot()
     msg = cl.Message(content="Starting the bot...")
     await msg.send()
@@ -78,6 +106,15 @@ async def start():
 
 @cl.on_message
 async def main(message):
+    """
+    Asynchronous function that handles a message received by the client.
+
+    Parameters:
+        message (object): The message object received by the client.
+
+    Returns:
+        None
+    """
     chain = cl.user_session.get("chain") 
     cb = cl.AsyncLangchainCallbackHandler(
         stream_final_answer=True, answer_prefix_tokens=["FINAL", "ANSWER"]
