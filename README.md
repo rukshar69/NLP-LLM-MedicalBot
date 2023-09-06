@@ -2,7 +2,7 @@
 A quantined llama 2 based medical bot using a medical book pdf for vector database and chainlit for ui
 
 ## Demo Video
-[![Demo Video](https://img.youtube.com/vi/5z5KZz6xZmQ/0.jpg)](https://youtu.be/5z5KZz6xZmQ)
+[![Alt Text](https://img.youtube.com/vi/fu9XSh72pLM/0.jpg)](https://www.youtube.com/watch?v=fu9XSh72pLM)
 
 ## Features
 - The medicalbot uses the pdf file [71763-gale-encyclopedia-of-medicine.-vol.-1.-2nd-ed.pdf](https://github.com/rukshar69/NLP-LLM-MedicalBot/blob/main/medical_bot_llm/data/71763-gale-encyclopedia-of-medicine.-vol.-1.-2nd-ed.pdf) is used to generate a vector database and this vector database is used as a reference when answering user questions.
