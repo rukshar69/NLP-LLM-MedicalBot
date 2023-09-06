@@ -20,3 +20,7 @@ A quantined llama 2 based medical bot using a medical book pdf for vector databa
 2. Run the script `python ingest.py` to create a vector database
 3. Run the chainlit-langchain script `chainlit run model.py -w` to run the chatbot powered by quantized Llama 2 7B Chat.
     - **Note**: Since this code utilizes the CPU, the reponse from the bot takes some time to generate.
+
+## Reference
+- [Build and Run a Medical Chatbot using Llama 2 on CPU Machine: All Open Source](https://www.youtube.com/watch?v=kXuHxI5ZcG0&t=2937s&ab_channel=AIAnytime)
+- [TheBloke/Llama-2-7B-Chat-GGML](https://huggingface.co/TheBloke/Llama-2-7B-Chat-GGML)
